@@ -15,12 +15,13 @@ Flickable {
     property alias contentHeight: webView.height
 
     id: flickable
-    width: contentWidth
+    //width: contentWidth
 
     //anchors.top: headerSpace.bottom
     //anchors.bottom: parent.top
     //anchors.left: parent.left
     //anchors.right: parent.right
+    //anchors.fill: parent
     pressDelay: 200
 
     onWidthChanged : {
@@ -48,7 +49,7 @@ Flickable {
             return url
         }
 
-        url: fixUrl(webBrowser.urlString)
+        //url: fixUrl(webBrowser.urlString)
         smooth: false // We don't want smooth scaling, since we only scale during (fast) transitions
         focus: true
 
@@ -79,20 +80,27 @@ Flickable {
             // zoom out
             contentsScale = Math.min(1,flickable.width / contentsSize.width)
         }
-        onUrlChanged: {
+        /*onUrlChanged: {
             // got to topleft
             flickable.contentX = 0
             flickable.contentY = 0
             //if (url != null) { header.editUrl = url.toString(); }
-        }
+        }*/
         onDoubleClick: {
-                        if (!heuristicZoom(clickX,clickY,2.5)) {
-                            var zf = flickable.width / contentsSize.width
-                            if (zf >= contentsScale)
-                                zf = 2.0*contentsScale // zoom in (else zooming out)
-                            doZoom(zf,clickX*zf,clickY*zf)
-                         }
-                       }
+            if (!heuristicZoom(clickX,clickY,2.5)) {
+                var zf = flickable.width / contentsSize.width
+                if (zf >= contentsScale)
+                    zf = 2.0*contentsScale // zoom in (else zooming out)
+                doZoom(zf,clickX*zf,clickY*zf)
+             }
+        }
+        onLoadFailed: {
+            console.log("Failed to load page: " + url)
+        }
+
+        onLoadFinished: {
+            console.log("Loading page finished.")
+        }
 
         SequentialAnimation {
             id: quickZoom

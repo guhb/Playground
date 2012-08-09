@@ -5,7 +5,7 @@ import "content"
 
 Rectangle {
     id: window
-    width: 960; height: 640
+    width: 440 + content.width; height: 640
 
     property string currentFeed: "rss.news.yahoo.com/rss/topstories"
     property bool loading: feedModel.status == XmlListModel.Loading
@@ -23,6 +23,8 @@ Rectangle {
     }
 
     Row {
+        id: listPanel
+        //z: 10
         Rectangle {
             id: sourceList
             width: 220; height: window.height
@@ -59,13 +61,33 @@ Rectangle {
                 anchors.right: list.right
             }
         }
-
-        ContentView {
-            id: content
-            //anchors.left: articleList.right
-            url: "http://www.news.yahoo.com"
+        Rectangle {
+            id: c
+            width: 420 ; height: parent.height
+            Text {
+                //anchors.fill: parent
+                width: 420
+                id: content
+                wrapMode: Text.WordWrap
+            }
+            ScrollBar {
+                scrollArea: c; height: c.height; width: 8
+                anchors.right: c.right
+            }
         }
     }
+    /*
+    Rectangle {
+        anchors.left: listPanel.right
+        height: parent.height
+        width: content.width
+        ContentView {
+            //anchors.left: listPanel.right
+            id: content
+            //anchors.left: articleList.right
+            url: "http://www.qt-project.org"
+        }
+    }*/
     Component {
         id: quitButtonDelegate
         Item {
