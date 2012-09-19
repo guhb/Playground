@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>iOS Home Screen with CoffeeScript | Tutorail Demo</title>
+
+        <!-- Our CSS stylesheet file-->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+
+        <!--[if It IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <section id="homeScreen">
+            <div id="mask">
+                <div id="allScreens">
+                    <!-- The .screen divs will go here -->
+                </div>
+            </div>
+
+            <ul id="indicators">
+                <!--A LI element for every screen -->
+            </ul>
+
+            <div id="dock">
+                <!-- The three dock icons will go here -->
+            </div>
+        </section>
+
+        <!-- JavaScript includes -->
+        <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+        <script src="assets/js/touchable.js"></script>
+        <script src="assets/js/coffee-script.js"></script>
+        <script type="text/coffeescript" src="main.coffee"></script>
+    </body>
+</html>
